@@ -7,7 +7,10 @@ template <int D, class T>
 class DimBase {
   public:
     DimBase()    : dim(T()), dims()  {}
-    DimBase(T v) : dim(v),   dims(v-1) {
+    template<class... Args>
+    DimBase(T v, Args... args)
+        : dim(v),   dims(args...)
+    {
     }
 
     T& operator[](int d) {
@@ -34,7 +37,10 @@ template <class T>
 class DimBase<1,T> {
   public:
     DimBase()    : dim(T()) {}
-    DimBase(T v) : dim(v)   {
+
+    DimBase(T v)
+    : dim(v)
+    {
     }
 
     T& operator[](int d) {
