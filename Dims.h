@@ -4,10 +4,10 @@
 using namespace std;
 
 template <int D, class T>
-class Dim {
+class DimBase {
   public:
-    Dim()    : dim(T()), dims()  {}
-    Dim(T v) : dim(v),   dims(v-1) {
+    DimBase()    : dim(T()), dims()  {}
+    DimBase(T v) : dim(v),   dims(v-1) {
     }
 
     T& operator[](int d) {
@@ -19,7 +19,7 @@ class Dim {
     }
 
     T dim;
-    Dim<D-1,T> dims;
+    DimBase<D-1,T> dims;
 };
 
 template <int D, class T>
@@ -31,10 +31,10 @@ ostream& operator<<(ostream& out, const Dim<D,T> &obj){
 }
 
 template <class T>
-class Dim<1,T> {
+class DimBase<1,T> {
   public:
-    Dim()    : dim(T()) {}
-    Dim(T v) : dim(v)   {
+    DimBase()    : dim(T()) {}
+    DimBase(T v) : dim(v)   {
     }
 
     T& operator[](int d) {
@@ -54,3 +54,17 @@ ostream& operator<<(ostream& out, const Dim<1,T> &obj){
   
   return out;
 }
+
+template <int D, class T>
+class Dim : public DimBase<D,T>{
+    public:
+        Dim()    : DimBase<D,T>() {}
+        Dim(T v) : DimBase<D,T>(v)   {}
+};
+
+template <class T>
+class Dim<1,T> : public DimBase<1,T>{
+    public:
+        Dim()    : DimBase<1,T>() {}
+        Dim(T v) : DimBase<1,T>(v)   {}
+};
