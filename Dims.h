@@ -11,7 +11,7 @@ class DimBase {
     }
 
     T& operator[](int d) {
-      return const_cast<T &>(static_cast<const Dim<D,T>& >(*this)[d]);
+      return const_cast<T &>(static_cast<const DimBase<D,T>& >(*this)[d]);
     }
     
     const T& operator[](int d) const {
@@ -23,7 +23,7 @@ class DimBase {
 };
 
 template <int D, class T>
-ostream& operator<<(ostream& out, const Dim<D,T> &obj){
+ostream& operator<<(ostream& out, const DimBase<D,T> &obj){
     out<<obj.dims
 	<<" "<<obj.dim;
   
@@ -38,7 +38,7 @@ class DimBase<1,T> {
     }
 
     T& operator[](int d) {
-      return const_cast<T &>(static_cast<const Dim<1,T>& >(*this)[d]);
+      return const_cast<T &>(static_cast<const DimBase<1,T>& >(*this)[d]);
     }
 
     const T& operator[](int d) const {
@@ -49,7 +49,7 @@ class DimBase<1,T> {
 };
 
 template <class T>
-ostream& operator<<(ostream& out, const Dim<1,T> &obj){
+ostream& operator<<(ostream& out, const DimBase<1,T> &obj){
     out<<obj.dim;
   
   return out;
