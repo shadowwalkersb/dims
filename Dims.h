@@ -11,11 +11,10 @@ class Dim {
       {}
     
     Dim(T v)
-	    : val(v)
+        : vals(D, v)
       {}
     
     vector<T> vals;
-    T val;
 };
 
 template <int D, class T>
