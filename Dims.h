@@ -17,6 +17,14 @@ class Dim {
             static_assert(sizeof...(args)==D, "Wrong number of arguments");
     }
     
+    T& operator[](int d) {
+      return const_cast<T &>(static_cast<const Dim<D,T>& >(*this)[d]);
+    }
+
+    const T& operator[](int d) const {
+      return vals[d-1];
+    }
+
     vector<T> vals;
 };
 
