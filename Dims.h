@@ -41,7 +41,6 @@ class DimBase<1,T> {
     DimBase(T v)
     : dim(v)
     {
-            cout<<"DimBase<1>::ctor("<<v<<")"<<endl;
     }
 
     T& operator[](int d) {
