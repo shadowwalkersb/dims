@@ -8,16 +8,13 @@ class Dim {
   public:
     Dim()    : dim(T()), dims()  {}
     Dim(T v) : dim(v),   dims(v-1) {
-      cout<<"Dim<"<<D<<">::ctor("<<v<<")"<<endl;
     }
 
     T& operator[](int d) {
-      cout<<"operator[]<"<<D<<">(int "<<d<<")"<<endl;
       return const_cast<T &>(static_cast<const Dim<D,T>& >(*this)[d]);
     }
     
     const T& operator[](int d) const {
-      cout<<"operator[]<"<<D<<">(int "<<d<<")"<<endl;
       return d==D ? dim : dims[d];
     }
 
@@ -38,7 +35,6 @@ class Dim<1,T> {
   public:
     Dim()    : dim(T()) {}
     Dim(T v) : dim(v)   {
-      cout<<"Dim<1>::ctor("<<v<<")"<<endl;
     }
 
     T& operator[](int d) {
