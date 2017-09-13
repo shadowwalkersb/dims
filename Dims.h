@@ -1,16 +1,18 @@
 #include <vector>
 #include <iostream>
+#include <type_traits>
 
 using namespace std;
 
 template <int D, class T>
-class DimBase {
+class Dim {
   public:
-    DimBase()    : dim(T()), dims()  {}
+    Dim()    : dim(T()), dims()  {}
     template<class... Args>
-    DimBase(T v, Args... args)
+    Dim(T v, Args... args)
         : dim(v),   dims(args...)
     {
+            static_assert(sizeof...(Args)+1==D, "Wrong number of arguments");
     }
 
     T& operator[](int d) {
@@ -22,7 +24,7 @@ class DimBase {
     }
 
     T dim;
-    DimBase<D-1,T> dims;
+    Dim<D-1,T> dims;
 };
 
 template <int D, class T>
@@ -34,11 +36,11 @@ ostream& operator<<(ostream& out, const DimBase<D,T> &obj){
 }
 
 template <class T>
-class DimBase<1,T> {
+class Dim<1,T> {
   public:
-    DimBase()    : dim(T()) {}
+    Dim()    : dim(T()) {}
 
-    DimBase(T v)
+    Dim(T v)
     : dim(v)
     {
     }
@@ -60,17 +62,3 @@ ostream& operator<<(ostream& out, const DimBase<1,T> &obj){
   
   return out;
 }
-
-template <int D, class T>
-class Dim : public DimBase<D,T>{
-    public:
-        Dim()    : DimBase<D,T>() {}
-        Dim(T v) : DimBase<D,T>(v)   {}
-};
-
-template <class T>
-class Dim<1,T> : public DimBase<1,T>{
-    public:
-        Dim()    : DimBase<1,T>() {}
-        Dim(T v) : DimBase<1,T>(v)   {}
-};
