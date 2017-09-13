@@ -43,6 +43,7 @@ class Dim<1,T> {
     Dim(T v)
     : dim(v)
     {
+            cout<<"Dim<1>::ctor("<<v<<")"<<endl;
     }
 
     T& operator[](int d) {
