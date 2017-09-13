@@ -8,7 +8,6 @@ class DimBase {
   public:
     DimBase()    : dim(T()), dims()  {}
     DimBase(T v) : dim(v),   dims(v-1) {
-      cout<<"DimBase<"<<D<<">::ctor("<<v<<")"<<endl;
     }
 
     T& operator[](int d) {
@@ -36,7 +35,6 @@ class DimBase<1,T> {
   public:
     DimBase()    : dim(T()) {}
     DimBase(T v) : dim(v)   {
-      cout<<"DimBase<1>::ctor("<<v<<")"<<endl;
     }
 
     T& operator[](int d) {
