@@ -1,5 +1,6 @@
 #include <vector>
 #include <iostream>
+#include <stdexcept>
 #include <type_traits>
 
 using namespace std;
